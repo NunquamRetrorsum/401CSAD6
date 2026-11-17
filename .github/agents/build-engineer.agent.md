@@ -34,7 +34,7 @@ Hello World, систему складання, юніт-тести та CI, а 
 - `.github/skills/github-actions/SKILL.md` — workflow `ci.yml` з матрицею трьох ОС.
 
 ## Доступні commands (prompt-файли)
-`/git-init`, `/create-project`, `/create-build`, `/create-actions`, `/check`, `/init` (оркестратор).
+`/git-init`, `/create-project`, `/create-build`, `/create-actions`, `/check`, `/init-all` (оркестратор).
 Кожна команда описує передумови, дії, очікувані файли, перевірки та повідомлення про помилку.
 
 ## Правила роботи з файлами

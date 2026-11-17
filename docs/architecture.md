@@ -18,20 +18,20 @@
 | Skill «складання і тестування» | `.github/skills/build-and-test/SKILL.md` | Agent Skill |
 | Skill «GitHub Actions» | `.github/skills/github-actions/SKILL.md` | Agent Skill |
 | Commands | `.github/prompts/{git-init,create-project,create-build,create-actions,check}.prompt.md` | prompt file (`*.prompt.md`, викликається як `/назва`) |
-| Orchestrator | `.github/prompts/init.prompt.md` | prompt file, що послідовно посилається на інші команди |
+| Orchestrator (`init` у методичці) | `.github/prompts/init-all.prompt.md` | prompt file, що послідовно посилається на інші команди. Назва `init-all`, бо вбудована команда Copilot Chat `/init` (генерація `copilot-instructions.md`) перекриває однойменний prompt-файл |
 | Детермінована реалізація `/check` | `scripts/check.sh` | звичайний bash-скрипт; `/check` запускає його або повторює ті самі 11 перевірок |
 
 ## 3. Схема взаємодії
 
 ```
 Користувач
-   │  /init
+   │  /init-all
    ▼
 ┌──────────────────────── build-engineer.agent.md ────────────────────────┐
 │ роль · межі відповідальності · заборони · критерії завершення          │
 │                                                                        │
-│  init.prompt.md (оркестратор)                                          │
-│   1 ─► git-init.prompt.md ──────────────────────► .gitignore, git status│
+│  init-all.prompt.md (оркестратор)                                          │
+│   1 ─► git-init-all.prompt.md ──────────────────────► .gitignore, git status│
 │   2 ─► create-project.prompt.md ─► SKILL project-scaffold ─► src/, README│
 │   3 ─► create-build.prompt.md ───► SKILL build-and-test ──► package.json,│
 │                                                   tsconfig, tests/, ci.sh/ci.bat│
@@ -59,12 +59,12 @@
    (наприклад, `/create-build` вимагає `src/hello.ts`). Якщо їх немає — повідомляє, яку команду запустити.
 2. **Перевірка результату.** Після дії команда запускає свої перевірки (`npm run build`, `npm test`,
    smoke-тест `dist/hello`, grep по `ci.yml`) і цитує фактичний вивід.
-3. **Зупинка на першій помилці.** `/init` не переходить до кроку N+1, доки перевірка кроку N не пройшла.
+3. **Зупинка на першій помилці.** `/init-all` не переходить до кроку N+1, доки перевірка кроку N не пройшла.
    Звіт явно каже «ЗУПИНЕНО на кроці N. Кроки N+1… не виконувались».
 4. **Виправлення лише за підтвердженням.** Агент пропонує diff, застосовує після «так», повторює перевірку.
 5. **Без прихованих успіхів.** Критерії завершення у маніфесті — чек-лист; якщо хоч один пункт не виконано,
    звіт має містити «НЕ ЗАВЕРШЕНО».
-6. **Ідемпотентність.** Повторний `/init` на готовому проєкті нічого не перезаписує і завершується
+6. **Ідемпотентність.** Повторний `/init-all` на готовому проєкті нічого не перезаписує і завершується
    «усі кроки пропущено, /check 11/11 PASS».
 
 ## 6. Межі безпеки

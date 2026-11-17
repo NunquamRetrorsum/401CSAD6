@@ -18,7 +18,7 @@ run() { # run <номер> <назва> <команда...>
 
 c1() { f=.github/agents/build-engineer.agent.md; test -f $f && grep -q '## Роль' $f && grep -q '## Заборонені дії' $f && grep -q '## Критерії успішного завершення' $f; }
 c2() { for s in project-scaffold build-and-test github-actions; do f=.github/skills/$s/SKILL.md; test -f $f && grep -q 'Вхідні дані' $f && grep -q 'Результат' $f && grep -q 'Перевірки' $f || { echo "skill $s неповний"; return 1; }; done; }
-c3() { for p in git-init create-project create-build create-actions check init; do test -f .github/prompts/$p.prompt.md || { echo "бракує $p.prompt.md"; return 1; }; done; }
+c3() { for p in git-init create-project create-build create-actions check init-all; do test -f .github/prompts/$p.prompt.md || { echo "бракує $p.prompt.md"; return 1; }; done; }
 c4() { for f in src/hello.ts src/lib.ts tests/hello.test.ts README.md docs/architecture.md docs/usage.md .gitignore; do test -f $f || { echo "бракує $f"; return 1; }; done; }
 c5() { node -e 'const p=require("./package.json");if(!p.scripts.build||!p.scripts.test)process.exit(1)' && grep -q '"types": \["node"\]' tsconfig.json; }
 c6() { npm run build >/dev/null && test -f dist/hello.js && test -f dist/hello && test -f dist/hello.cmd; }

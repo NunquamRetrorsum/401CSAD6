@@ -16,7 +16,7 @@
    **Agent**, а в списку агентів — **build-engineer**. У режимі Ask агент не має права створювати файли.
 3. Ввести:
    ```
-   /init
+   /init-all
    ```
 4. Агент послідовно виконає `/git-init` → `/create-project` → `/create-build` → `/create-actions` → `/check`,
    після кожного кроку запускаючи перевірку. На першій помилці він зупиниться, покаже причину
@@ -32,7 +32,7 @@
 | `/create-build` | skill build-and-test: `package.json`, `tsconfig.json`, тести, `ci.sh`/`ci.bat` | так |
 | `/create-actions` | skill github-actions: `.github/workflows/ci.yml` | так |
 | `/check` | 11 перевірок, звіт PASS/FAIL | **ні** |
-| `/init` | оркестратор усіх кроків вище | так |
+| `/init-all` | оркестратор усіх кроків вище | так |
 
 Повторний запуск будь-якої команди безпечний: існуючі файли не перезаписуються.
 
