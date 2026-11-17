@@ -1,7 +1,6 @@
 ---
 description: Створює початковий кросплатформний проєкт Hello World на TypeScript за skill project-scaffold.
 agent: build-engineer
-tools: ['edit', 'search', 'runCommands']
 ---
 # /create-project
 

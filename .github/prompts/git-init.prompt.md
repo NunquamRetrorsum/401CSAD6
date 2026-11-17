@@ -1,7 +1,6 @@
 ---
 description: Перевіряє Git-репозиторій, створює або доповнює .gitignore і показує стан Git. Нічого не комітить.
 agent: build-engineer
-tools: ['edit', 'search', 'runCommands']
 ---
 # /git-init
 

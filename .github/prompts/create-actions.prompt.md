@@ -1,7 +1,6 @@
 ---
 description: Створює GitHub Actions workflow .github/workflows/ci.yml з матрицею Windows, Linux і macOS за skill github-actions.
 agent: build-engineer
-tools: ['edit', 'search', 'runCommands']
 ---
 # /create-actions
 

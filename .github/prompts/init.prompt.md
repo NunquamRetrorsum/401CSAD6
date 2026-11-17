@@ -1,7 +1,6 @@
 ---
 description: Оркестратор. Послідовно виконує /git-init, /create-project, /create-build, /create-actions і /check. Зупиняється на першій помилці та завершує зрозумілим звітом.
 agent: build-engineer
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'problems', 'testFailure']
 ---
 # /init — оркестратор повного сценарію
 
