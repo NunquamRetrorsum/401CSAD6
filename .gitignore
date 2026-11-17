@@ -1,0 +1,26 @@
+# Залежності
+node_modules/
+
+# Результати складання
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Локальні результати запуску
+*.log
+npm-debug.log*
+.vitest/
+
+# Секрети та локальні налаштування
+.env
+.env.*
+*.pem
+*.key
+
+# ОС / редактори
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
