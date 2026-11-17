@@ -58,8 +58,8 @@ Hello, World!
 ## 4. CI-скрипти та workflow
 **Запит:** «напиши ci.sh і ci.bat з однаковими кроками та ci.yml, який лише їх викликає у матриці ubuntu/windows/macos».
 **Результат:** `ci.sh` (`set -euo pipefail`, smoke-тест порівнює вивід `dist/hello` з `Hello, World!`),
-`ci.bat` (`|| goto :fail`), `ci.yml` (одна job, `fail-fast: false`, `actions/checkout@v4`,
-`actions/setup-node@v4` з кешем npm, крок для Windows через `shell: cmd`, `upload-artifact@v4` з `dist/`).
+`ci.bat` (`|| goto :fail`), `ci.yml` (одна job, `fail-fast: false`, `actions/checkout@v5`,
+`actions/setup-node@v5` з кешем npm, крок для Windows через `shell: cmd`, `upload-artifact@v5` з `dist/`).
 **Локальна перевірка `./ci.sh`:**
 ```
 ==> Версії інструментів
