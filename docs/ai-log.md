@@ -122,7 +122,58 @@ Hello, World!
 `copilot-instructions.md` видалено, бо він не є частиною агента.
 
 ## 7. Відтворення через Copilot на гілці develop
-*(заповнює студент після запуску `/init` у Copilot Chat; додати скріншот або текст звіту оркестратора)*
+**Дата:** 2026-11-17, 18:04–18:07. **Режим:** Copilot Chat → Agent → `build-engineer`, новий чат, гілка `develop`
+(у робочому дереві лише `.github/`, `docs/`, `README.md`, `.gitignore`, `scripts/check.sh`).
+
+**Крок 0, `/check` до запуску:** 5/11 PASS — агент прочитав skill `build-and-test`, запустив `scripts/check.sh`
+і чесно перелічив, чого бракує: `src/hello.ts`, конфігурація `npm run build`/`npm test`, `ci.sh`/`ci.bat`,
+`.github/workflows/ci.yml`.
+
+**`/init-all`:** агент послідовно виконав `/git-init` → `/create-project` → `/create-build` → `/create-actions` → `/check`,
+на кожному кроці запитуючи підтвердження на запис файлів і запуск команд. Створено: `src/lib.ts`, `src/hello.ts`,
+`tests/hello.test.ts`, `package.json`, `package-lock.json`, `tsconfig.json`, `vitest.config.ts`, `bin/hello`, `bin/hello.cmd`,
+`scripts/postbuild.mjs`, `scripts/clean.mjs`, `ci.sh`, `ci.bat`, `.github/workflows/ci.yml`.
+
+**`/check` після запуску:** `Підсумок: 11/11 PASS. Проєкт готовий.`
+
+**Порівняння з гілкою `feature/lab1-hello-world`.** Текст файлів відрізняється (агент пише власну редакцію, без
+коментарів українською, з іншим групуванням тестів), але функціонально результат той самий: ті самі експорти
+`greet`/`add`, тест `BasicAddition`, ті самі npm-скрипти, матриця трьох ОС у `ci.yml`, виклик лише `ci.sh`/`ci.bat`.
+Відмінність, яку варто зафіксувати: агент використав `actions/*@v4`, тоді як у `feature` версії оновлено до `v5`;
+на результат CI це не впливає, але в skill `github-actions` варто явно вказати версію `v5` як обов'язкову.
+
+Згенерований `src/lib.ts`:
+```ts
+export function greet(name = "World"): string {
+  return `Hello, ${name}!`;
+}
+
+export function add(a: number, b: number): number {
+  return a + b;
+}
+```
+Згенерований `tests/hello.test.ts`:
+```ts
+import { describe, expect, it } from "vitest";
+import { add, greet } from "../src/lib.js";
+
+describe("BasicAddition", () => {
+  it("adds two numbers", () => {
+    expect(add(2, 3)).toBe(5);
+  });
+});
+
+describe("greet", () => {
+  it("uses World as the default name", () => {
+    expect(greet()).toBe("Hello, World!");
+  });
+
+  it("greets the provided name", () => {
+    expect(greet("APKS")).toBe("Hello, APKS!");
+  });
+});
+```
+Згенеровані файли на `develop` не комітились: ця гілка за задумом містить лише агента; повний результат живе у `feature/*`.
 
 ## 8. Прийняті рішення щодо безпеки
 - Секрети, токени, вміст `.env` AI не передавались; у workflow немає `secrets.*`.
