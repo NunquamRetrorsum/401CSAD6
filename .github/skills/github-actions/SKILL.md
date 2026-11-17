@@ -7,7 +7,7 @@ description: Створює GitHub Actions workflow .github/workflows/ci.yml з 
 
 ## Коли застосовувати
 - Користувач просить «налаштувати CI», «GitHub Actions», або викликає `/create-actions`.
-- Оркестратор `/init` дійшов до кроку 4.
+- Оркестратор `/init-all` дійшов до кроку 4.
 - Треба перевірити, що workflow містить усі три ОС (режим перевірки).
 
 ## Передумова

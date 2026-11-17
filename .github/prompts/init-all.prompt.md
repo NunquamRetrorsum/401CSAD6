@@ -2,7 +2,10 @@
 description: Оркестратор. Послідовно виконує /git-init, /create-project, /create-build, /create-actions і /check. Зупиняється на першій помилці та завершує зрозумілим звітом.
 agent: build-engineer
 ---
-# /init — оркестратор повного сценарію
+# /init-all — оркестратор повного сценарію
+
+> Назва `init-all`, а не `init`: у Copilot Chat вбудована команда `/init` (генерує `copilot-instructions.md`)
+> перекриває однойменний prompt-файл, тому оркестратор викликається як `/init-all`.
 
 ## Мета
 За один запуск отримати робочий, зібраний і протестований проєкт Hello World з CI,
@@ -26,14 +29,14 @@ agent: build-engineer
 | 5 | `/check` | — | 11/11 PASS |
 
 ## Ідемпотентність
-Повторний запуск `/init` на вже готовому проєкті має:
+Повторний запуск `/init-all` на вже готовому проєкті має:
 - не перезаписати жодного існуючого файлу;
 - не додати дублікатів у `.gitignore` чи `package.json`;
 - завершитися звітом «усі кроки пропущено (вже виконано), /check: 11/11 PASS».
 
 ## Фінальний звіт
 ```
-/init — звіт
+/init-all — звіт
  Крок 1 /git-init ......... OK   (.gitignore: без змін)
  Крок 2 /create-project ... OK   (створено: src/lib.ts, src/hello.ts, README.md)
  Крок 3 /create-build ..... OK   (build OK, 3 тести passed, dist/hello → "Hello, World!")
@@ -44,7 +47,7 @@ agent: build-engineer
 або, у разі помилки:
 ```
  Крок 3 /create-build ..... FAIL (npm test: BasicAddition expected 5, received 6)
-Результат: ЗУПИНЕНО на кроці 3. Кроки 4–5 не виконувались. Виправте помилку і запустіть /init повторно.
+Результат: ЗУПИНЕНО на кроці 3. Кроки 4–5 не виконувались. Виправте помилку і запустіть /init-all повторно.
 ```
 
 ## Заборонено
