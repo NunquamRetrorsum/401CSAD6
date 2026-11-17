@@ -1,0 +1,3 @@
+#!/bin/sh
+# Обгортка для Linux/macOS: запускає зібраний dist/hello.js через Node.js
+exec node "$(dirname "$0")/hello.js" "$@"

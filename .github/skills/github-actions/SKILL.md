@@ -24,9 +24,9 @@ description: Створює GitHub Actions workflow .github/workflows/ci.yml з 
 ## Правила вмісту workflow
 1. Одна job `build-and-test` зі `strategy.matrix.os: [ubuntu-latest, windows-latest, macos-latest]`,
    `fail-fast: false`, щоб бачити результат кожної ОС.
-2. Кроки: `actions/checkout@v4` → `actions/setup-node@v4` (з `cache: npm`) →
+2. Кроки: `actions/checkout@v5` → `actions/setup-node@v5` (з `cache: npm`) →
    `./ci.sh` для `runner.os != 'Windows'` → `ci.bat` через `shell: cmd` для Windows →
-   `actions/upload-artifact@v4` з `name: hello-${{ matrix.os }}`, `path: dist/`, `if-no-files-found: error`.
+   `actions/upload-artifact@v5` з `name: hello-${{ matrix.os }}`, `path: dist/`, `if-no-files-found: error`.
 3. **Workflow не містить команд складання** (`npm run build`, `tsc`, `vitest`) — лише виклик
    `ci.sh`/`ci.bat`. Уся логіка складання живе у скриптах, щоб її можна було повторити локально.
 4. `permissions: contents: read` — мінімальні права.
