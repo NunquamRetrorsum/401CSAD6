@@ -1,7 +1,6 @@
 ---
 description: Створює конфігурацію складання (tsc, npm scripts), юніт-тест BasicAddition на Vitest, виконуваний файл hello та скрипти ci.sh / ci.bat за skill build-and-test.
 agent: build-engineer
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'problems', 'testFailure']
 ---
 # /create-build
 

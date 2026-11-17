@@ -1,7 +1,6 @@
 ---
 description: Перевіряє проєкт без змін - структуру, конфігурацію, складання, тести, виконуваний файл, YAML workflow і стан Git. Повертає звіт PASS/FAIL по кожному пункту.
 agent: build-engineer
-tools: ['search', 'runCommands', 'problems', 'testFailure']
 ---
 # /check
 

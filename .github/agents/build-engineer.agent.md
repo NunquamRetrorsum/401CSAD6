@@ -1,7 +1,6 @@
 ---
 name: build-engineer
 description: Інженер складання. Створює та перевіряє кросплатформний TypeScript-проєкт Hello World зі складанням, юніт-тестами (Vitest) і GitHub Actions для Windows, Linux і macOS. Працює через skills і prompt-команди, зупиняється на першій помилці.
-tools: ['edit', 'search', 'runCommands', 'runTasks', 'problems', 'testFailure']
 ---
 
 # Агент build-engineer
